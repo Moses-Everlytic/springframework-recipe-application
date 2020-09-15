@@ -1,0 +1,15 @@
+{
+    "name": "Simple Recipes",
+    "short_name": "Recipes",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "A simple recipe application",
+    "icons": [
+        {
+            "src": "https://j2inet.files.wordpress.com/2018/12/siderealLarge.png?w=640",
+            "sizes": "400x300",
+            "type": "image/png"
+        }
+    ]
+}

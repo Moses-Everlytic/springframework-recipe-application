@@ -1,36 +1,23 @@
 package com.nexstudio.recipe.controllers;
 
-import java.util.Optional;
-
-import com.nexstudio.recipe.models.Category;
-import com.nexstudio.recipe.models.UnitOfMeasure;
-import com.nexstudio.recipe.repositories.CategoryRepository;
-import com.nexstudio.recipe.repositories.UnitOfMeasureRepository;
+import com.nexstudio.recipe.services.RecipeService;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    private final RecipeService recipeService;
 
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
-
     @RequestMapping({"", "/index"})
-    public String getIndex() {
-
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("African");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
-
-        System.out.println("Category Id is: " + categoryOptional.get().getId());
-        System.out.println("Unit Of Measure Id is: " + unitOfMeasureOptional.get().getId());
+    public String getIndex(Model model) {
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
