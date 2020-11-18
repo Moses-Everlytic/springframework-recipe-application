@@ -19,6 +19,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -36,6 +39,7 @@ public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("Loading Bootstrap Data");
     }    
 
     private List<Recipe> getRecipes() {
@@ -110,23 +114,19 @@ public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
                         + "\n" + "\n"
                         + "Don’t have enough avocados? To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great");
 
-        perfectGuacamoleNotes.setRecipe(perfectGuacamoleRecipe);
         perfectGuacamoleRecipe.setNotes(perfectGuacamoleNotes);
 
+        //very redundent - could add helper method, and make simpler
+        perfectGuacamoleRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUOM));
+        perfectGuacamoleRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), teaSpoonUOM));
+        perfectGuacamoleRecipe.addIngredient(new Ingredient("fresh lime or lemon juice", new BigDecimal(2), tableSpoonUOM));
+        perfectGuacamoleRecipe.addIngredient(new Ingredient("minced red onion ir thinly sliced green onion", new BigDecimal(2), tableSpoonUOM));
+        perfectGuacamoleRecipe.addIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUOM));
+        perfectGuacamoleRecipe.addIngredient(new Ingredient("Cilantro", new BigDecimal(2), tableSpoonUOM));
 
-        perfectGuacamoleRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), eachUOM, perfectGuacamoleRecipe));
-        perfectGuacamoleRecipe.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(".5"), teaSpoonUOM, perfectGuacamoleRecipe));
-        perfectGuacamoleRecipe.getIngredients()
-                .add(new Ingredient("fresh lime or lemon juice", new BigDecimal(2), tableSpoonUOM, perfectGuacamoleRecipe));
-        perfectGuacamoleRecipe.getIngredients()
-                .add(new Ingredient("minced red onion ir thinly sliced green onion", new BigDecimal(2), tableSpoonUOM, perfectGuacamoleRecipe));
-        perfectGuacamoleRecipe.getIngredients()
-                .add(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUOM, perfectGuacamoleRecipe));
-        perfectGuacamoleRecipe.getIngredients().add(new Ingredient("Cilantro", new BigDecimal(2), tableSpoonUOM, perfectGuacamoleRecipe));
-        perfectGuacamoleRecipe.getIngredients()
-                .add(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUOM, perfectGuacamoleRecipe));
-        perfectGuacamoleRecipe.getIngredients()
-                .add(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUOM, perfectGuacamoleRecipe));
+        //try helper method to add ingredients
+        addRecipeIngredient(perfectGuacamoleRecipe, "freshly grated black pepper", new BigDecimal(2), dashUOM);
+        addRecipeIngredient(perfectGuacamoleRecipe, "ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUOM);
 
         perfectGuacamoleRecipe.getCategories().add(mexicanCategory);
         perfectGuacamoleRecipe.getCategories().add(africanCategory);
@@ -187,6 +187,10 @@ public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
         return recipes;
     }
 
+    private void addRecipeIngredient(Recipe recipe, String description, BigDecimal amount, UnitOfMeasure uom) {
+        recipe.addIngredient(new Ingredient(description, amount, uom));
+    }
+
     private void isCategoryPresent(Optional<Category> CategoryOptional) {
         if (!CategoryOptional.isPresent()) {
             throw new RuntimeException("Expected Category Not Found");
@@ -198,4 +202,5 @@ public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
             throw new RuntimeException("Expected UOM Not Found");
         }
     }
+    
 }

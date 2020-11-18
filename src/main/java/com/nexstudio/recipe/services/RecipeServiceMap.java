@@ -8,6 +8,9 @@ import com.nexstudio.recipe.repositories.RecipeRepository;
 
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class RecipeServiceMap implements RecipeService {
     private final RecipeRepository recipeRepository;
@@ -18,11 +21,10 @@ public class RecipeServiceMap implements RecipeService {
 
     @Override
     public Set<Recipe> getRecipes() {
-        Set<Recipe> recipeSet = new HashSet<>();
+        log.debug("I'm in the service");
 
+        Set<Recipe> recipeSet = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
         return recipeSet;
     }
-
-
 }
