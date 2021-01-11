@@ -20,9 +20,12 @@
                             Recipe
                         </div>
                         <div class="card-body">
+                            <!--/*@thymesVar id="recipe" type="com.nexstudio.recipe.models.Recipe"*/-->
                             <h5 class="card-title" th:text="${recipe.description}">Title</h5>
                             <p class="card-text" th:text="'Prep Time: ' + ${recipe.perpTime} + ' min'">prep time</p>
-                            
+                            <p>
+                                <a href="#" th:href="@{'/recipe/show/'} + ${recipe.id}">view</a>
+                            </p>
                         </div>
                         <div class="card-footer text-muted">
                             <a href="#" th:href="${recipe.url}"><span th:text="${recipe.source}">source</span></a>
