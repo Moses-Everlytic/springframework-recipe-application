@@ -1,5 +1,5 @@
 package com.nexstudio.recipe.models;
 
 public enum Difficulty {
-    EASY, MODARETE, HARD
+    EASY, MODERATE, KIND_OF_HARD, HARD
 }

@@ -61,7 +61,7 @@ public class RecipeServiceMapTest {
     public void getRecipesTest() throws Exception {
 
         Recipe recipe = new Recipe();
-        HashSet receipesData = new HashSet();
+        HashSet<Recipe> receipesData = new HashSet<>();
         receipesData.add(recipe);
 
         when(recipeService.getRecipes()).thenReturn(receipesData);

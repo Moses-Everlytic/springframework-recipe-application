@@ -87,7 +87,7 @@ public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
         // Perfect Guacamole Recipe
         Recipe perfectGuacamoleRecipe = new Recipe();
         perfectGuacamoleRecipe.setDescription("Perfect Guacamole");
-        perfectGuacamoleRecipe.setprepTime(10);
+        perfectGuacamoleRecipe.setPrepTime(10);
         perfectGuacamoleRecipe.setCookTime(0);
         perfectGuacamoleRecipe.setServings(4);
         perfectGuacamoleRecipe.setSource("Simply Recipes");
@@ -142,12 +142,12 @@ public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
         // Spicy Grilled Chicken Tacos Recipe
         Recipe tacoRecipe = new Recipe();
         tacoRecipe.setDescription("Spicy Grilled Chicken Tacos");
-        tacoRecipe.setprepTime(20);
+        tacoRecipe.setPrepTime(20);
         tacoRecipe.setCookTime(15);
         tacoRecipe.setServings(6);
         tacoRecipe.setSource("Simply Recipes");
         tacoRecipe.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
-        tacoRecipe.setDifficulty(Difficulty.MODARETE);
+        tacoRecipe.setDifficulty(Difficulty.MODERATE);
         tacoRecipe.setDirections("1 Prepare a gas or charcoal grill for medium-high, direct heat." + "\n" + "\n"
                 + "2 Make the marinade and coat the chicken: In a large bowl, stir together the chili powder, oregano, cumin, sugar, salt, garlic and orange zest. Stir in the orange juice and olive oil to make a loose paste. Add the chicken to the bowl and toss to coat all over."
                 + "\n" + "\n" + "Set aside to marinate while the grill heats and you prepare the rest of the toppings."

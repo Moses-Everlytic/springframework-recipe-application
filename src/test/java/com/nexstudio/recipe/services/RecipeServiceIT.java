@@ -1,5 +1,6 @@
 package com.nexstudio.recipe.services;
 
+
 import static org.junit.Assert.assertEquals;
 
 import com.nexstudio.recipe.commands.RecipeCommand;
@@ -15,6 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+
+/**
+ * Created by jt on 6/21/17.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RecipeServiceIT {
