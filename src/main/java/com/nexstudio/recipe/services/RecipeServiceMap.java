@@ -4,20 +4,33 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import com.nexstudio.recipe.commands.RecipeCommand;
+import com.nexstudio.recipe.converters.RecipeCommandToRecipe;
+import com.nexstudio.recipe.converters.RecipeToRecipeCommand;
 import com.nexstudio.recipe.models.Recipe;
 import com.nexstudio.recipe.repositories.RecipeRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class RecipeServiceMap implements RecipeService {
+    
     private final RecipeRepository recipeRepository;
+    private final RecipeCommandToRecipe recipeCommandToRecipe;
+    private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-    public RecipeServiceMap(RecipeRepository recipeRepository) {
+    public RecipeServiceMap(
+        RecipeRepository recipeRepository, 
+        RecipeCommandToRecipe recipeCommandToRecipe, 
+        RecipeToRecipeCommand recipeToRecipeCommand
+    ) {
         this.recipeRepository = recipeRepository;
+        this.recipeCommandToRecipe = recipeCommandToRecipe;
+        this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
 
     @Override
@@ -37,5 +50,15 @@ public class RecipeServiceMap implements RecipeService {
             throw new RuntimeException("Recipe Not Found");
         }
         return recipeOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand saveRecipeCommand(RecipeCommand command) {
+        Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
+
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        log.debug("Saved RecipeId:" + savedRecipe.getId());
+        return recipeToRecipeCommand.convert(savedRecipe);
     }
 }
