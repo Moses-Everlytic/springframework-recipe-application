@@ -61,4 +61,14 @@ public class RecipeServiceMap implements RecipeService {
         log.debug("Saved RecipeId:" + savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
     }
+
+    @Override
+    public RecipeCommand findCommandById(Long l) {
+        RecipeCommand detacheRecipeCommand = new RecipeCommand();
+        detacheRecipeCommand.setId(l);
+
+        Recipe updateRecipe = recipeCommandToRecipe.convert(detacheRecipeCommand);
+        Recipe updateRecipeCommand = 
+        return null;
+    }
 }
