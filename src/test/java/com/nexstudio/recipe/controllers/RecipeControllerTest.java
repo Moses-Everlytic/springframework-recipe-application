@@ -41,7 +41,7 @@ public class RecipeControllerTest {
 
 		when(recipeService.findById(anyLong())).thenReturn(recipe);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("recipe/show/1"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1"))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.view().name("recipe/show"))
 			.andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
@@ -51,7 +51,7 @@ public class RecipeControllerTest {
 	public void shouldGetNewRecipeForm() throws Exception {
 		RecipeCommand command = new RecipeCommand();
 
-		mockMvc.perform(MockMvcRequestBuilders.get("recipe/new"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/recipe/new"))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.view().name("recipe/recipeform"))
 			.andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
@@ -77,11 +77,11 @@ public class RecipeControllerTest {
 	@Test
 	public void shouldGetUpdateView() throws Exception {
 		RecipeCommand command = new RecipeCommand();
-		command.setId(2L);
+		command.setId(1L);
 
 		when(recipeService.findCommandById(anyLong())).thenReturn(command);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("recipe/update/2"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/recipe/update/1"))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.view().name("recipe/recipeform"))
 			.andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));

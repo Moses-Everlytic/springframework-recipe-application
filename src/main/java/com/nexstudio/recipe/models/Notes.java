@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

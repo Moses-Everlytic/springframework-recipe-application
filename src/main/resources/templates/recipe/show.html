@@ -56,7 +56,9 @@
                                     <p class="card-text">
                                         <div th:each="ingredient: ${recipe.ingredients}">
                                             <small class="text-warning" 
-                                                th:text="${ingredient.amount} + ' ' + ${ingredient.uom.description} + ' - ' + ${ingredient.description}">
+                                            th:text="${ingredient.getAmount() + ' ' + 
+                                            ingredient.uom.getDescription() + ' ' + 
+                                            ingredient.getDescription()}">
                                                 ingredient and amount
                                             </small>
                                         </div>

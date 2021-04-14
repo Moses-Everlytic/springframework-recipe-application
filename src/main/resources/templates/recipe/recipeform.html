@@ -96,14 +96,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <ul>
+                                                <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
                                                     <li th:remove="all">1 Cup of milk</li>
                                                     <li th:remove="all">1 teaspoon of chocolate</li>
-                                                    <li th:each="ingrdient : ${recipe.ingredients}" 
-                                                        th:text="${ingredient.getAmount() + ' ' + 
-                                                        ingredient.oum.getDescription() + ' ' + 
-                                                        ingredient.getDescription()}">
-                                                        1 Teaspoon of Sugar
+                                                    <li th:each="ingredient : ${recipe.ingredients}">
+                                                        <span th:text="${ingredient.getAmount() + ' ' + 
+                                                            ingredient.uom.getDescription() + ' ' + 
+                                                            ingredient.getDescription()}">
+                                                            1 Teaspoon of Sugar
+                                                        </span>
                                                     </li>
                                                 </ul>
                                             </div>
