@@ -1,0 +1,79 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recipe Project | View Ingredients</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+            rel="stylesheet" crossorigin="anonymous" 
+            th:href="@{/webjars/bootstrap/5.0.0-beta1/css/bootstrap.min.css}">
+
+</head>
+<body>
+    <div class="container-fluid" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card mb-3">
+                    <div class="card-header bg-warning">
+                        <h3 class="text-white">Ingredients</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table" th:if="${not #lists.isEmpty(recipe.ingredients)}">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Amount</th>
+                                            <th>Description</th>
+                                            <th>View</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:remove="all">
+                                            <td>123</td>
+                                            <td>0</td>
+                                            <td>Testing Tasty Stuff</td>
+                                            <td><a href="#">View</a></td>
+                                            <td><a href="#">Update</a></td>
+                                            <td><a href="#">Delete</a></td>
+                                        </tr>
+                                        <tr th:each="ingredient : ${recipe.ingredients}">
+                                            <td th:text="${ingredient.id}">1</td>
+                                            <td th:text="${ingredient.amount} + ' ' + ${ingredient.uom.getDescription()}">
+                                                0
+                                            </td>
+                                            <td th:text="${ingredient.description}">
+                                                Testing
+                                            </td>
+                                            <td>
+                                                <a href="#" th:href="@{'/recipe/'+ ${recipe.id} + 
+                                                    '/ingredient/' + ${ingredient.id} + '/show' }" class="text-info">View</a>
+                                                </td>
+                                            <td>
+                                                <a href="#" th:href="@{'/recipe/'+ ${recipe.id} + 
+                                                '/ingredient/' + ${ingredient.id} + '/update' }" class="text-secondary">Update</a>
+                                            </td>
+                                            <td>
+                                                <a href="#" th:href="@{'/recipe/'+ ${recipe.id} + 
+                                                '/ingredient/' + ${ingredient.id} + '/delete' }" class="text-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+            crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

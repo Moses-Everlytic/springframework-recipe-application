@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -50,8 +49,6 @@ public class RecipeControllerTest {
 
 	@Test
 	public void shouldGetNewRecipeForm() throws Exception {
-		RecipeCommand command = new RecipeCommand();
-
 		mockMvc.perform(MockMvcRequestBuilders.get("/recipe/new"))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.view().name("recipe/recipeform"))

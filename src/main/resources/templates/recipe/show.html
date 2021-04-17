@@ -53,6 +53,7 @@
                         <div class="col-md-6">
                             <div class="card mb-3">
                                 <div class="card-body">
+                                    <a href="#" th:href="@{'/recipe/'} + ${recipe.id} + '/ingredients'">View Ingredients</a>
                                     <p class="card-text">
                                         <div th:each="ingredient: ${recipe.ingredients}">
                                             <small class="text-warning" 
