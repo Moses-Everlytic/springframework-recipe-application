@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active:
+      - dev
+
+logging:
+  level:
+    com:
+      nexstudio: DEBUG
+
+# spring:
+#   main:
+#     web-application-type: none
+
+---
+spring:
+  profiles: dev
+nextsudio:
+  username: username
+  password: pass
+  jbdcURL:  localhost
+
+  
+---
+spring:
+  profiles: prod
+nextsudio:
+  username: prodUser
+  password: prodPass
+  jbdcURL:  prodDBURL
+  
