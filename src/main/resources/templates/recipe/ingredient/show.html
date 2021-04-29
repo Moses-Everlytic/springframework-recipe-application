@@ -16,7 +16,11 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card mb-3">
                     <div class="card-header bg-warning">
-                        <h3 class="text-white">Ingredients</h3>
+                        <h3 class="text-white">Ingredient</h3>
+                        <a href="#" th:href="@{'/recipe/'+ ${ingredient.recipeId} + '/ingredients'}" 
+                            class="text-white">
+                            Back to Ingredients
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -27,12 +31,14 @@
                                             <th>ID</th>
                                             <th>Amount</th>
                                             <th>Description</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tr th:remove="all">
                                         <td>12333</td>
                                         <td>2 Cups</td>
                                         <td>Butter</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td th:text="${ingredient.id}">1</td>
@@ -41,6 +47,10 @@
                                         </td>
                                         <td th:text="${ingredient.description}">
                                             Testing
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" th:href="@{'/recipe/'+ ${ingredient.recipeId} + 
+                                            '/ingredient/update/' + ${ingredient.id}}" class="text-secondary">Update</a>
                                         </td>
                                     </tr>
                                 </table>
