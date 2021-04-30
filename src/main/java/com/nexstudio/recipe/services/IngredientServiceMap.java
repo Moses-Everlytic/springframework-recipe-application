@@ -1,6 +1,8 @@
 package com.nexstudio.recipe.services;
 
+import java.lang.StackWalker.Option;
 import java.util.Optional;
+import java.util.Set;
 
 import com.nexstudio.recipe.commands.IngredientCommand;
 import com.nexstudio.recipe.converters.IngredientCommandToIngredient;
@@ -101,6 +103,34 @@ public class IngredientServiceMap implements IngredientService {
         }
 
         return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+    }
+
+    @Override
+    public void deleteRecipeIngredient(Long recipeId, Long ingredientId) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if(!recipeOptional.isPresent()) {
+            log.error("Recipe Of Ingredient Not FOUND");
+        }
+
+        Recipe recipe = recipeOptional.get();
+
+        Optional<Ingredient> ingredientToDelete = recipe.getIngredients().stream()
+            .filter(ingredient -> ingredient.getId().equals(ingredientId))
+            .findFirst();
+
+        if(!ingredientToDelete.isPresent()) {
+            log.error("Ingredient Not Found");
+        }
+
+        Ingredient ingredient = ingredientToDelete.get();
+
+        //this will cause hibernate to delete it from the database
+        ingredient.setRecipe(null);
+
+        recipe.getIngredients().remove(ingredient);
+
+        recipeRepository.save(recipe);
     }
     
 }
