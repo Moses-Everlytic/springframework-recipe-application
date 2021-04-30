@@ -17,6 +17,10 @@
                 <div class="card mb-3">
                     <div class="card-header bg-warning">
                         <h3 class="text-white">Ingredients</h3>
+                        <a href="#" th:href="@{'/recipe/'+ ${recipe.id} + '/ingredient/new'}" 
+                            class="text-white">
+                            Add Ingredient
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="row">

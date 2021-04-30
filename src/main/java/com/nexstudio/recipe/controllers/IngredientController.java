@@ -1,6 +1,8 @@
 package com.nexstudio.recipe.controllers;
 
 import com.nexstudio.recipe.commands.IngredientCommand;
+import com.nexstudio.recipe.commands.RecipeCommand;
+import com.nexstudio.recipe.commands.UnitOfMeasureCommand;
 import com.nexstudio.recipe.services.IngredientService;
 import com.nexstudio.recipe.services.RecipeService;
 import com.nexstudio.recipe.services.UnitOfMeasureService;
@@ -42,6 +44,21 @@ public class IngredientController {
 
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
         return "recipe/ingredient/show";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String addRecipeIngredient(@PathVariable String recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        //throw exception if recipeCommand is null
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(recipeCommand.getId());
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+        model.addAttribute("ingredient", ingredientCommand);
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredient/ingredientform";
     }
 
     @GetMapping("/recipe/{recipeId}/ingredient/update/{ingredientId}")
