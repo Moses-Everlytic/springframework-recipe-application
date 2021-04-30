@@ -57,10 +57,10 @@
                                             </div>
                                             <div class="col-md-3 form-group">
                                                 <label for="difficulty">Difficulty:</label>
-                                                <select class="form-select">
-                                                    <option>Easy</option>
-                                                    <option>Medium</option>
-                                                    <option>Hard</option>
+                                                <select class="form-select" th:field="*{difficulty}">
+                                                    <option th:each="difficultyValue : ${T(com.nexstudio.recipe.models.Difficulty).values()}"   
+                                                        th:value="${difficultyValue.name()}" 
+                                                        th:text="${difficultyValue.name()}">value</option>
                                                 </select>
                                             </div>
                                         </div>
