@@ -18,7 +18,8 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <div class="card bg-dark text-white">
-                                <img src="https://www.simplyrecipes.com/wp-content/uploads/2018/07/Guacamole-LEAD-6.jpg" 
+                                <img src="../../static/images/Guacamole-1-2.jpg" 
+                                    th:src="@{/images/Guacamole-1-2.jpg}"
                                     class="card-img" 
                                     alt="recipe image"
                                     onerror="this.src='https://via.placeholder.com/1200x400'">
@@ -38,6 +39,7 @@
                                         <small th:text="'Cook time: ' + ${recipe.cookTime} + ' min'">cook time</small><br/>
                                         <small th:text="'Servings: ' + ${recipe.servings}">servings</small>
                                     </p>
+                                    <a href="#" th:href="@{'/recipe/image/'} + ${recipe.id}">Change Image</a>
                                 </div>
                             </div>
                         </div>
