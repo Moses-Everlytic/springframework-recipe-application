@@ -1,6 +1,7 @@
 package com.nexstudio.recipe.services;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.never;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import com.nexstudio.recipe.converters.RecipeCommandToRecipe;
 import com.nexstudio.recipe.converters.RecipeToRecipeCommand;
+import com.nexstudio.recipe.exceptions.NotFoundException;
 import com.nexstudio.recipe.models.Recipe;
 import com.nexstudio.recipe.repositories.RecipeRepository;
 
@@ -80,5 +82,14 @@ public class RecipeServiceMapTest {
         recipeService.deleteById(idToDelete);
 
         verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void getRecipeByIdTestNotFound() throws Exception {
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        assertThrows(NotFoundException.class, () -> recipeService.findById(1L));
     }
 }

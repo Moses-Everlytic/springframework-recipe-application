@@ -7,6 +7,7 @@ import java.util.Set;
 import com.nexstudio.recipe.commands.RecipeCommand;
 import com.nexstudio.recipe.converters.RecipeCommandToRecipe;
 import com.nexstudio.recipe.converters.RecipeToRecipeCommand;
+import com.nexstudio.recipe.exceptions.NotFoundException;
 import com.nexstudio.recipe.models.Recipe;
 import com.nexstudio.recipe.repositories.RecipeRepository;
 
@@ -47,7 +48,7 @@ public class RecipeServiceMap implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe Not Found");
+            throw new NotFoundException("Recipe Not Found");
         }
         return recipeOptional.get();
     }

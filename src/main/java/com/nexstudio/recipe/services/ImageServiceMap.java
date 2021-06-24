@@ -1,7 +1,6 @@
 package com.nexstudio.recipe.services;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import com.nexstudio.recipe.models.Recipe;
 import com.nexstudio.recipe.repositories.RecipeRepository;
