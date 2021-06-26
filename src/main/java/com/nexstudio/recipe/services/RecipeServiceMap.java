@@ -19,16 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class RecipeServiceMap implements RecipeService {
-    
+
     private final RecipeRepository recipeRepository;
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-    public RecipeServiceMap(
-        RecipeRepository recipeRepository, 
-        RecipeCommandToRecipe recipeCommandToRecipe, 
-        RecipeToRecipeCommand recipeToRecipeCommand
-    ) {
+    public RecipeServiceMap(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe,
+            RecipeToRecipeCommand recipeToRecipeCommand) {
         this.recipeRepository = recipeRepository;
         this.recipeCommandToRecipe = recipeCommandToRecipe;
         this.recipeToRecipeCommand = recipeToRecipeCommand;
@@ -48,8 +45,9 @@ public class RecipeServiceMap implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()) {
-            throw new NotFoundException("Recipe Not Found");
+            throw new NotFoundException("Recipe Not Found. Recipe id value:" + l.toString());
         }
+
         return recipeOptional.get();
     }
 
