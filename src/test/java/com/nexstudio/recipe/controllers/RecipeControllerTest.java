@@ -39,6 +39,13 @@ public class RecipeControllerTest {
 	}
 
 	@Test
+	public void shouldRedirectToHomePage() throws Exception {
+		mockMvc.perform(get("/recipe"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/"));
+	}
+
+	@Test
 	public void testGetRecipe() throws Exception {
 		Recipe recipe = new Recipe();
 		recipe.setId(1L);

@@ -73,6 +73,11 @@ public class RecipeController {
         return "redirect:/recipe/show/" + savedCommand.getId();
     }
 
+    @GetMapping("/recipe")
+    public String redirectToHomePage() {
+        return "redirect:/";
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {
