@@ -16,6 +16,7 @@ import com.nexstudio.recipe.repositories.RecipeRepository;
 import com.nexstudio.recipe.repositories.UnitOfMeasureRepository;
 
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,13 +25,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class StartupData implements ApplicationListener<ContextRefreshedEvent> {
+@Profile("default")
+public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final RecipeRepository recipeRepository;
     private final CategoryRepository categoryRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    public StartupData(RecipeRepository recipeRepository, CategoryRepository categoryRepository,
+    public RecipeBootStrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository,
             UnitOfMeasureRepository unitOfMeasureRepository) {
         this.recipeRepository = recipeRepository;
         this.categoryRepository = categoryRepository;
