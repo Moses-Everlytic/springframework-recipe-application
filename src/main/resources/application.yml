@@ -4,6 +4,9 @@ spring:
       - dev
   # main:
   #   web-application-type: none
+  
+server:
+  port : 8081
 
 logging:
   level:
